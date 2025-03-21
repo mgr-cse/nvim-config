@@ -35,3 +35,25 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+-- indentation
+vim.opt.expandtab = false
+vim.opt.shiftwidth = 4
+vim.opt.smartindent = false
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+
+if vim.env.TMUX ~= nil then
+	vim.g.clipboard = {
+		['name'] = 'myClipboard',
+		['copy'] = {
+			['+'] = {'tmux', 'load-buffer', '-'},
+			['*'] = {'tmux', 'load-buffer', '-'},
+		},
+		['paste'] = {
+			['+'] = {'tmux', 'save-buffer', '-'},
+			['*'] = {'tmux', 'save-buffer', '-'},
+		},
+		['cache_enabled'] = 1,
+	}
+end
